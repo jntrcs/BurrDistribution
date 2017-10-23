@@ -7,7 +7,8 @@ pr<-percentile_matching(mis_spec)
 bayes<-bayes_estimates_sim(mis_spec, d=.35, check=T)
 bayes.est<-apply(bayes,2,mean)
 
-pdf(file="Mispecification-Model.pdf")
+#pdf(file="Mispecification-Model.pdf") do not rerun
+par(lwd=2)
 curve(dgamma(x, alpha,beta), xlim=c(0,3), ylim=c(0,1.8), main="Misspecified Model", ylab="Density", lty=2)
 lines(density(mis_spec))
 curve(dburr(x, mle[1],mle[2]), add=T, col="blue")
@@ -30,6 +31,7 @@ bayes<-bayes_estimates_sim(mis_spec, d=.15, check=T)
 bayes.est<-apply(bayes,2,mean)
 
 pdf(file="Misspec2.pdf")
+par(lwd=2)
 curve(dgamma(x, alpha,beta), xlim=c(0,6), ylim=c(0,.7), main="Misspecified Model (X~Gamma(5,2))", ylab="Density", lty=2)
 lines(density(mis_spec))
 curve(dburr(x, mle[1],mle[2]), add=T, col="blue")

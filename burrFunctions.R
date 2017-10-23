@@ -118,6 +118,7 @@ percentile_matching<-function(data){
   return(c(NA,NA))
 }
 
+#check allows you to visually examine your mixing, but it will be set to false for the simulation
 bayes_estimates_sim<-function(data, d, nDraws=2000, nBurn=500, check=FALSE){
   ##c and k will follow a gamma prior with alpha=2.5 and beta =.5
   sumlogdata<-sum(log(data))
@@ -133,7 +134,7 @@ bayes_estimates_sim<-function(data, d, nDraws=2000, nBurn=500, check=FALSE){
   old<-log_posterior(draws[1,])
   accept<-0
   for (i in 2:nrow(draws)){
-    cands<-draws[i-1,]+rnorm(2, 0, d)#2*B%*%rnorm(2) #
+    cands<-draws[i-1,]+rnorm(2, 0, d)#
     new<-log_posterior(cands)
     if (log(runif(1))<new-old){
       draws[i,]<-cands
